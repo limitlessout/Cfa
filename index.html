@@ -571,6 +571,18 @@
 
     </form>
 
+    <div id="successScreen" style="display:none; text-align:center; padding: 40px 10px 10px;">
+      <div style="font-size:44px; margin-bottom:12px;">✅</div>
+      <h2 style="margin:0 0 12px;">Votre demande a bien été envoyée</h2>
+      <p style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color:var(--ink-soft); font-size:15px; max-width:44ch; margin:0 auto;">
+        Merci. Nous avons bien reçu vos informations et vos documents. Vous serez recontacté(e) selon le moyen de contact indiqué.
+      </p>
+    </div>
+
+    <p id="submitError" class="error-msg" style="text-align:center; margin-top:20px;">
+      Une erreur est survenue lors de l'envoi. Merci de réessayer, ou de nous contacter directement si le problème persiste.
+    </p>
+
     <footer>
       Ce formulaire est un outil d'accompagnement indépendant. Il ne se substitue à aucune démarche officielle auprès d'un organisme public.
     </footer>
@@ -659,6 +671,49 @@
   });
 
   updateProgress();
+
+  // Submit via fetch (AJAX) so Netlify doesn't redirect to a non-existent success page
+  const mainForm = document.getElementById('mainForm');
+  const successScreen = document.getElementById('successScreen');
+  const submitError = document.getElementById('submitError');
+
+  mainForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const lastSection = mainForm.querySelector(`.block[data-step="${totalSteps}"]`);
+    if (!validateStep(lastSection)) {
+      lastSection.querySelector('.error-msg').classList.add('show');
+      return;
+    }
+
+    const submitBtn = mainForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours…';
+    submitError.classList.remove('show');
+
+    const formData = new FormData(mainForm);
+
+    fetch('/', {
+      method: 'POST',
+      body: formData
+    })
+      .then((response) => {
+        if (response.ok) {
+          mainForm.style.display = 'none';
+          document.getElementById('progressTrack').style.display = 'none';
+          document.getElementById('progressCaption').style.display = 'none';
+          successScreen.style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error('Submission failed');
+        }
+      })
+      .catch(() => {
+        submitError.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Soumettre ma demande';
+      });
+  });
 </script>
 
 </body>
