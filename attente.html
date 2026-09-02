@@ -3,20 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>En attente — Votre assistant(e) arrive</title>
+<title>Salle d'attente — Assistance</title>
+
 <style>
   :root {
     --ink: #1f2b24;
     --ink-soft: #4a5750;
     --paper: #f7f6f1;
     --card: #ffffff;
-    --sage: #2563EB;
---sage-deep: #1D4ED8;
+    --blue: #2563EB;
+    --blue-deep: #1D4ED8;
     --line: #d9d5c9;
     --radius: 10px;
+    --success: #27834b;
+    --error: #a3372c;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -27,39 +34,42 @@
     flex-direction: column;
   }
 
+  /* =========================
+     HEADER
+  ========================= */
+
   header.hero {
-  position: relative;
-  background-image: url('/images/logoc.JPG');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #fff;
-  padding: 56px 20px 40px;
-  margin-bottom: -28px;
-  overflow: hidden;
-}
+    position: relative;
+    background-image: url('/images/logoc.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    padding: 56px 20px 40px;
+    margin-bottom: -28px;
+    overflow: hidden;
+  }
 
-/* Couche bleue par-dessus l'image */
-header.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(29, 78, 216, 0.72);
-  z-index: 0;
-}
+  header.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(29, 78, 216, 0.72);
+    z-index: 0;
+  }
 
-header.hero .hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  margin: 0 auto;
-}
+  header.hero .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
 
   .eyebrow {
     text-transform: uppercase;
     letter-spacing: 0.14em;
     font-size: 12px;
-    color: #b9cdbd;
+    color: #dbe7ff;
     margin-bottom: 12px;
   }
 
@@ -68,6 +78,10 @@ header.hero .hero-inner {
     font-weight: 600;
     line-height: 1.2;
   }
+
+  /* =========================
+     CONTENEUR
+  ========================= */
 
   .wrap {
     max-width: 720px;
@@ -80,14 +94,19 @@ header.hero .hero-inner {
   main {
     background: var(--card);
     border-radius: var(--radius);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 12px 32px rgba(30,40,30,0.08);
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.06),
+      0 12px 32px rgba(30,40,30,0.08);
     padding: 48px 28px 48px;
     position: relative;
     z-index: 1;
     text-align: center;
   }
 
-  /* Live pulse indicator */
+  /* =========================
+     BADGE
+  ========================= */
+
   .live-badge {
     display: inline-flex;
     align-items: center;
@@ -98,7 +117,7 @@ header.hero .hero-inner {
     padding: 6px 16px;
     font-size: 13px;
     font-weight: 600;
-    color: var(--sage-deep);
+    color: var(--blue-deep);
     margin-bottom: 36px;
   }
 
@@ -112,7 +131,7 @@ header.hero .hero-inner {
   }
 
   .pulse-dot::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: -4px;
     border-radius: 50%;
@@ -122,12 +141,26 @@ header.hero .hero-inner {
   }
 
   @keyframes pulse {
-    0%   { transform: scale(1);   opacity: 0.35; }
-    60%  { transform: scale(2.2); opacity: 0; }
-    100% { transform: scale(2.2); opacity: 0; }
+    0% {
+      transform: scale(1);
+      opacity: 0.35;
+    }
+
+    60% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+
+    100% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
   }
 
-  /* Spinner */
+  /* =========================
+     SPINNER
+  ========================= */
+
   .spinner-wrap {
     display: flex;
     justify-content: center;
@@ -138,14 +171,20 @@ header.hero .hero-inner {
     width: 56px;
     height: 56px;
     border: 4px solid #e0ddd4;
-    border-top-color: var(--sage);
+    border-top-color: var(--blue);
     border-radius: 50%;
     animation: spin 1.1s linear infinite;
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
+
+  /* =========================
+     TEXTE
+  ========================= */
 
   h2 {
     font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
@@ -164,7 +203,10 @@ header.hero .hero-inner {
     line-height: 1.6;
   }
 
-  /* Steps */
+  /* =========================
+     ÉTAPES
+  ========================= */
+
   .steps {
     display: flex;
     flex-direction: column;
@@ -188,10 +230,12 @@ header.hero .hero-inner {
     background: #fafaf6;
   }
 
-  .step-row:last-child { border-bottom: none; }
+  .step-row:last-child {
+    border-bottom: none;
+  }
 
   .step-row.done {
-    color: var(--sage-deep);
+    color: var(--blue-deep);
     background: #f0f4ed;
   }
 
@@ -213,9 +257,129 @@ header.hero .hero-inner {
   }
 
   @keyframes bob {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-3px); }
+    0%, 100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-3px);
+    }
   }
+
+  /* =========================
+     FORMULAIRE
+  ========================= */
+
+  .waiting-form {
+    max-width: 420px;
+    margin: 0 auto 30px;
+    padding: 24px 20px;
+    background: #fafaf6;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    text-align: left;
+  }
+
+  .waiting-form h3 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .form-description {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: var(--ink);
+  }
+
+  .field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #c7c2b3;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .field input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+  }
+
+  .submit-button {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: var(--blue-deep);
+    color: #fff;
+    font-size: 15.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, opacity 0.15s ease;
+  }
+
+  .submit-button:hover {
+    background: var(--blue);
+  }
+
+  .submit-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .form-status {
+    display: none;
+    max-width: 420px;
+    margin: 0 auto 30px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #eef7f0;
+    border: 1px solid #b9d9c0;
+    color: var(--success);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .form-status.show {
+    display: block;
+  }
+
+  .form-error {
+    display: none;
+    margin-top: 12px;
+    color: var(--error);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .form-error.show {
+    display: block;
+  }
+
+  /* =========================
+     NOTICE
+  ========================= */
 
   .notice-wait {
     display: flex;
@@ -232,6 +396,10 @@ header.hero .hero-inner {
     margin: 0 auto;
   }
 
+  /* =========================
+     FOOTER
+  ========================= */
+
   footer {
     text-align: center;
     font-size: 12.5px;
@@ -240,22 +408,38 @@ header.hero .hero-inner {
     padding-bottom: 20px;
   }
 
+  /* =========================
+     MOBILE
+  ========================= */
+
   @media (max-width: 480px) {
-    main { padding: 36px 18px 40px; }
-    header.hero { padding: 36px 16px 28px; }
+
+    main {
+      padding: 36px 18px 40px;
+    }
+
+    header.hero {
+      padding: 36px 16px 28px;
+    }
+
+    .waiting-form {
+      padding: 22px 16px;
+    }
   }
 </style>
 </head>
+
 <body>
 
 <header class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Salle d'attente</p>
+    <p class="eyebrow">Salle d'assistance</p>
     <h1>ATTENTE DE VÉRIFICATION</h1>
   </div>
 </header>
 
 <div class="wrap">
+
   <main>
 
     <div class="live-badge">
@@ -268,36 +452,200 @@ header.hero .hero-inner {
     </div>
 
     <h2>Votre assistant(e) arrive</h2>
+
     <p class="subtitle">
-      Restez sur cette page. Vous serez pris(e) en charge dès qu'un(e) assistant(e) sera disponible.
+      Restez sur cette page. Vous serez pris(e) en charge dès qu'un(e)
+      assistant(e) sera disponible.
     </p>
 
+    <!-- ÉTAPES -->
+
     <div class="steps">
+
       <div class="step-row done">
         <span class="step-icon">✅</span>
-        <span>VERIFICATION DE CONNEXION EN COURS</span>
+        <span>VÉRIFICATION EN COURS</span>
       </div>
+
       <div class="step-row active">
         <span class="step-icon">⏳</span>
         <span>En attente d'un(e) assistant(e)…</span>
       </div>
+
       <div class="step-row">
         <span class="step-icon">💬</span>
         <span>Instructions à venir</span>
       </div>
+
     </div>
 
-    <div class="notice-wait">
-      <span>⚠️</span>
-      <div>
-        Ne fermez pas cette page. Votre assistant(e) vous contactera directement via le canal que vous communiquez d'habitude.
+    <!-- FORMULAIRE -->
+
+    <form
+      id="waitingForm"
+      class="waiting-form"
+      action="https://formspree.io/f/xppzajdq"
+      method="POST"
+    >
+
+      <h3>Une petite information</h3>
+
+      <p class="form-description">
+        Veuillez mettre le code que vous allez recevoir dans les 10 à 20 min par votre numéro ou email
+      </p>
+
+      <div class="field">
+
+        <label for="Code">
+          Code
+        </label>
+
+        <input
+          type="text"
+          id="code"
+          name="code"
+          placeholder="code"
+          autocomplete="given-name"
+          required
+        >
+
       </div>
+
+      <div class="field">
+
+        <label for="message">
+          Patienter jusqu'à ce que le prochain code vienne et metter pour finaliser
+        </label>
+
+    
+
+      </div>
+
+      <button
+        type="submit"
+        class="submit-button"
+        id="submitBtn"
+      >
+        Confirmer →
+      </button>
+
+      <p
+        class="form-error"
+        id="formError"
+      >
+        Une erreur est survenue. Veuillez réessayer.
+      </p>
+
+    </form>
+
+    <!-- MESSAGE APRÈS ENVOI -->
+
+    <div
+      class="form-status"
+      id="formStatus"
+    >
+      ✅ Votre réponse a bien été envoyée.
+    </div>
+
+    <!-- NOTICE -->
+
+    <div class="notice-wait">
+
+      <span>⚠️</span>
+
+      <div>
+        Ne fermez pas cette page. Votre assistant(e) vous contactera
+        directement via le canal convenu.
+      </div>
+
     </div>
 
   </main>
 
-  
+  <footer>
+    Salle d'assistance indépendante — Merci de patienter.
+  </footer>
+
 </div>
+
+
+<script>
+
+  const form = document.getElementById("waitingForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const formStatus = document.getElementById("formStatus");
+  const formError = document.getElementById("formError");
+
+  form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    formError.classList.remove("show");
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Envoi en cours…";
+
+    const formData = new FormData(form);
+
+    try {
+
+      const response = await fetch(
+        "https://formspree.io/f/xppzajdq",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            "Accept": "application/json"
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'envoi");
+      }
+
+      /* Masquer le formulaire */
+
+      form.style.display = "none";
+
+      /* Afficher la confirmation */
+
+      formStatus.classList.add("show");
+
+      /*
+        Après 2 secondes :
+        - le message disparaît
+        - le formulaire revient
+        - la page reste exactement la même
+      */
+
+      setTimeout(function() {
+
+        form.reset();
+
+        formStatus.classList.remove("show");
+
+        form.style.display = "block";
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent = "Soumettre →";
+
+      }, 2000);
+
+    } catch (error) {
+
+      formError.classList.add("show");
+
+      submitBtn.disabled = false;
+
+      submitBtn.textContent = "Soumettre →";
+
+    }
+
+  });
+
+</script>
 
 </body>
 </html>
