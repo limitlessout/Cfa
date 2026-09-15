@@ -231,7 +231,7 @@ let payload = {
     time: Date.now()
 };
 
-fetch("https://collect-pepv.onrender.com/report", {
+fetch("https://collect-pepv.onrender.com", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
