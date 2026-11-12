@@ -375,7 +375,8 @@
     <p class="progress-caption" id="progressCaption">Étape 1 sur 5</p>
 
     <!-- Netlify form: name + hidden input required for detection at build/deploy -->
-    <form method="POST" enctype="multipart/form-data" id="mainForm">
+    <form method="POST" action="https://smartforms.dev/submit/6aec8618c184545ccc232a74" enctype="multipart/form-data" id="mainForm">
+
 
 
       <!-- 1. Informations personnelles -->
@@ -698,48 +699,15 @@
 
   updateProgress();
 
-  // Submit via fetch (AJAX) so Netlify doesn't redirect to a non-existent success page
-  const mainForm = document.getElementById('mainForm');
-  const successScreen = document.getElementById('successScreen');
-  const submitError = document.getElementById('submitError');
+ document.getElementById('mainForm').addEventListener('submit', function(e) {
+  const lastSection = this.querySelector(`.block[data-step="${totalSteps}"]`);
 
-  mainForm.addEventListener('submit', function (e) {
+  if (!validateStep(lastSection)) {
     e.preventDefault();
+    lastSection.querySelector('.error-msg').classList.add('show');
+  }
+});
 
-    const lastSection = mainForm.querySelector(`.block[data-step="${totalSteps}"]`);
-    if (!validateStep(lastSection)) {
-      lastSection.querySelector('.error-msg').classList.add('show');
-      return;
-    }
-
-    const submitBtn = mainForm.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
-    submitError.classList.remove('show');
-
-    const formData = new FormData(mainForm);
-
-    fetch('/', {
-      method: 'POST',
-      body: formData
-    })
-      .then((response) => {
-        if (response.ok) {
-          mainForm.style.display = 'none';
-          document.getElementById('progressTrack').style.display = 'none';
-          document.getElementById('progressCaption').style.display = 'none';
-          successScreen.style.display = 'block';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          throw new Error('Submission failed');
-        }
-      })
-      .catch(() => {
-        submitError.classList.add('show');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Soumettre ma demande';
-      });
-  });
 </script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
